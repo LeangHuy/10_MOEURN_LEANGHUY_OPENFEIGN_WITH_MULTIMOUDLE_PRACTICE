@@ -1,0 +1,22 @@
+package com.config.response;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.ErrorReportConfiguration;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.springframework.http.HttpStatus;
+
+import java.time.LocalDateTime;
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class ApiResponse<T> {
+    private String message;
+    private HttpStatus status;
+    private Integer statusCode;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private T payload;
+    private LocalDateTime timestamp;
+
+}

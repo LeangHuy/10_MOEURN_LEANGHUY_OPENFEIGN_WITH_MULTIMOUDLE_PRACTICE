@@ -1,0 +1,6 @@
+rootProject.name = 'open-feign-ft-multi-moudle'
+include 'customer-service'
+include 'product-service'
+include 'order-service'
+include 'common'
+

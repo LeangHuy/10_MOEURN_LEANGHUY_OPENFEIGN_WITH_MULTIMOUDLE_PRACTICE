@@ -1,0 +1,22 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: product-service
+  datasource:
+    url: jdbc:postgresql://localhost:5436/practice_feign
+    username: leanghuy
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+    database: postgresql
+springdoc:
+  swagger-ui:
+    tags-sorter: alpha
+    doc-expansion: false
