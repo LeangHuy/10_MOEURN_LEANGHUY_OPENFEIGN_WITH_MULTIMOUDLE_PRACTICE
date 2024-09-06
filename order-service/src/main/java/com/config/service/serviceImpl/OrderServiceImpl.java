@@ -81,16 +81,6 @@ public class OrderServiceImpl implements OrderService {
         return order.toResponse(customerResponse,productResponseList);
     }
 
-    private void ProductClient(List<ProductResponse> productResponseList, Long productId) {
-        ResponseEntity<ApiResponse<ProductResponse>> getProductById = productFeignClient.getProductById(productId);
-        if (getProductById.getStatusCode().is2xxSuccessful()){
-            ApiResponse<ProductResponse> apiResponse = getProductById.getBody();
-            assert apiResponse != null;
-            ProductResponse productResponse = apiResponse.getPayload();
-            productResponseList.add(productResponse);
-        }
-    }
-
     @Override
     public OrderResponse updateOrderById(Long orderId, OrderRequest orderRequest) {
         getOrderById(orderId);
@@ -102,5 +92,15 @@ public class OrderServiceImpl implements OrderService {
     public void deleteOrderById(Long orderId) {
         Order order = orderRepository.findById(orderId).orElseThrow(()->new NotFoundException("Order not found."));
         orderRepository.delete(order);
+    }
+
+    private void ProductClient(List<ProductResponse> productResponseList, Long productId) {
+        ResponseEntity<ApiResponse<ProductResponse>> getProductById = productFeignClient.getProductById(productId);
+        if (getProductById.getStatusCode().is2xxSuccessful()){
+            ApiResponse<ProductResponse> apiResponse = getProductById.getBody();
+            assert apiResponse != null;
+            ProductResponse productResponse = apiResponse.getPayload();
+            productResponseList.add(productResponse);
+        }
     }
 }
