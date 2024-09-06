@@ -56,7 +56,7 @@ public class ProductController {
 
     @GetMapping("/{productId}")
     @Operation(summary = "Get product by id.")
-    public ResponseEntity<ApiResponse<ProductResponse>> getProduct(@PathVariable Long productId) {
+    public ResponseEntity<ApiResponse<ProductResponse>> getProductById(@PathVariable Long productId) {
         ApiResponse<ProductResponse> response = ApiResponse.<ProductResponse>builder()
                 .message("Get product successfully.")
                 .status(HttpStatus.OK)

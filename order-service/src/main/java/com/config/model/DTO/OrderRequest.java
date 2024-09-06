@@ -1,15 +1,16 @@
 package com.config.model.DTO;
 
 import com.config.model.entity.Order;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public record OrderRequest(
-        @NotBlank @NotNull Long customerId,
-        @NotBlank @NotNull List<Long> productIds
+        @NotNull @Positive Long customerId,
+        @NotNull @NotEmpty List<Long> productIds
 ) {
     public Order toEntity() {
         LocalDate orderDate = LocalDate.now();
