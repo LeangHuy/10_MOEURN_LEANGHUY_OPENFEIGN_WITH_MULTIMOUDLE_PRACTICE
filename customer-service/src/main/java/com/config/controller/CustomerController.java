@@ -24,7 +24,7 @@ public class CustomerController {
 
     @PostMapping
     @Operation(summary = "Create a new customer.")
-    public ResponseEntity<ApiResponse<CustomerResponse>> createCustomer(@RequestBody CustomerRequest customerRequest) {
+    public ResponseEntity<ApiResponse<CustomerResponse>> createCustomer(@Valid @RequestBody CustomerRequest customerRequest) {
         ApiResponse<CustomerResponse> response = ApiResponse.<CustomerResponse>builder()
                 .message("Create a new customer successfully.")
                 .status(HttpStatus.CREATED)
@@ -75,6 +75,19 @@ public class CustomerController {
                 .status(HttpStatus.OK)
                 .statusCode(HttpStatus.OK.value())
                 .payload(customerService.updateCustomer(customerId,customerRequest))
+                .timestamp(LocalDateTime.now())
+                .build();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{customerId}")
+    @Operation(summary = "Delete customer by id.")
+    public ResponseEntity<ApiResponse<CustomerResponse>> deleteCustomerById(@PathVariable Long customerId) {
+        customerService.deleteCustomer(customerId);
+        ApiResponse<CustomerResponse> response = ApiResponse.<CustomerResponse>builder()
+                .message("Delete customer by id successfully.")
+                .status(HttpStatus.OK)
+                .statusCode(HttpStatus.OK.value())
                 .timestamp(LocalDateTime.now())
                 .build();
         return new ResponseEntity<>(response, HttpStatus.OK);
