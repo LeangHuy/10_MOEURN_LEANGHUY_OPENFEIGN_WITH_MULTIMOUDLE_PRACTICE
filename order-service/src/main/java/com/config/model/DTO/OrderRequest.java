@@ -16,4 +16,8 @@ public record OrderRequest(
         LocalDate orderDate = LocalDate.now();
         return new Order(null, customerId, productIds, orderDate);
     }
+    public Order toEntity(Long orderId) {
+        LocalDate orderDate = LocalDate.now();
+        return new Order(orderId, customerId, productIds, orderDate);
+    }
 }
