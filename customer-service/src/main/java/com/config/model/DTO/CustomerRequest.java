@@ -12,4 +12,8 @@ public record CustomerRequest(
     public Customer toEntity() {
         return new Customer(null, this.customerName, this.customerEmail);
     }
+
+    public Customer toEntity(Long customerId) {
+        return new Customer(customerId, this.customerName, this.customerEmail);
+    }
 }
